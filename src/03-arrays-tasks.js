@@ -36,15 +36,30 @@ function findElement(arr, value) {
  *    5 => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  let num = 1;
-  /* const arr = new Array(len);
-  for (let i = 0; i <= arr.length - 1; i++) {
-    arr.push(num);
-    num += 2;
-  }
-  return arr; */
+  /* let start = 1;
+  const arr2 = new Array(len).fill(undefined);
+
+  return arr2.map((elem) => {
+    elem = start;
+    start += 2;
+
+    return elem;
+  }); */
+
+  const array1 = new Array(len).fill(undefined);
+  return array1.reduce(
+    (accumulator) => {
+      if (!accumulator.length) {
+        return [1];
+      }
+
+      return [...accumulator, accumulator[accumulator.length - 1] + 2];
+    },
+    [],
+  );
 }
 
+console.log(generateOdds(5));
 
 /**
  * Returns the doubled array - elements of the specified array
@@ -58,8 +73,10 @@ function generateOdds(len) {
  *    [0, 1, 2, 3, 4, 5] => [0, 1, 2, 3, 4, 5,   0, 1, 2, 3, 4, 5]
  *    [] => []
  */
-function doubleArray(/* arr */) {
-  throw new Error('Not implemented');
+function doubleArray(arr) {
+  /* const arr2 = [arr, arr];
+  return arr2.flatMap((elem) => elem); */
+  return arr.concat(arr);
 }
 
 
@@ -74,8 +91,8 @@ function doubleArray(/* arr */) {
  *    [-1, 2, -5, -4, 0] => [ 2 ]
  *    [] => []
  */
-function getArrayOfPositives(/* arr */) {
-  throw new Error('Not implemented');
+function getArrayOfPositives(arr) {
+  return arr.filter((elem) => elem > 0);
 }
 
 /**

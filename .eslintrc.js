@@ -22,6 +22,7 @@ module.exports = {
     'no-plusplus': ['error', { 'allowForLoopAfterthoughts': true }],
     "quotes": ["error", "single", { "allowTemplateLiterals": true }],
     "use-isnan": ["error", {"enforceForSwitchCase": true}],
+    "no-param-reassign": 0,
   },
   
 };
