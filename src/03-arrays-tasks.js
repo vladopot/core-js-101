@@ -255,16 +255,17 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(arr) {
-  let sum = 0;
-  const newArr = arr.map((e) => {
-    e += sum;
-    sum = e;
-    return e;
-  });
-  return newArr;
+function getMovingSum(/* arr */) {
+  // let sum = 0;
+  // const newArr = [];
+  // for (let i = 0; i < arr.length; i + 1) {
+  //   const res = arr[i] + sum;
+  //   sum = arr[i];
+  //   newArr.push(res);
+  // }
+  // return newArr;
+  throw new Error('Not implemented');
 }
-
 
 /**
  * Returns every second item from the specified array:
