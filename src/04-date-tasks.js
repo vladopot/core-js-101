@@ -19,8 +19,9 @@
  *    'Tue, 26 Jan 2016 13:48:02 GMT' => Date()
  *    'Sun, 17 May 1998 03:00:00 GMT+01' => Date()
  */
-function parseDataFromRfc2822(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromRfc2822(value) {
+  const milSec = Date.parse(value);
+  return milSec;
 }
 
 /**
@@ -34,10 +35,10 @@ function parseDataFromRfc2822(/* value */) {
  *    '2016-01-19T16:07:37+00:00'    => Date()
  *    '2016-01-19T08:07:37Z' => Date()
  */
-function parseDataFromIso8601(/* value */) {
-  throw new Error('Not implemented');
+function parseDataFromIso8601(value) {
+  const dat = new Date(value);
+  return Date.parse(dat.toString());
 }
-
 
 /**
  * Returns true if specified date is leap year and false otherwise
@@ -53,10 +54,14 @@ function parseDataFromIso8601(/* value */) {
  *    Date(2012,1,1)    => true
  *    Date(2015,1,1)    => false
  */
-function isLeapYear(/* date */) {
-  throw new Error('Not implemented');
+function isLeapYear(date) {
+  const year = date.getFullYear();
+  const feb = new Date(year, 2, 0);
+  if (feb.getDate() === 29) {
+    return true;
+  }
+  return false;
 }
-
 
 /**
  * Returns the string representation of the timespan between two dates.
@@ -73,10 +78,43 @@ function isLeapYear(/* date */) {
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,10,0,0,250)     => "00:00:00.250"
  *    Date(2000,1,1,10,0,0),  Date(2000,1,1,15,20,10,453)   => "05:20:10.453"
  */
+
 function timeSpanToString(/* startDate, endDate */) {
+  // const DIFF = endDate - startDate;
+  // let HH = 0;
+  // let mm = 0;
+  // let ss = 0;
+  // let sss = 0;
+  // let ost = 0;
+  // if (DIFF >= 3600000) {
+  //   if (Math.floor(DIFF / 3600000) < 10) {
+  //     HH = `0${Math.floor(DIFF / 3600000)}`;
+  //   } else {
+  //     HH = `${Math.floor(DIFF / 3600000)}`;
+  //   }
+  //   ost = DIFF - HH * 3600000;
+  // }
+  // if (ost >= 60000) {
+  //   if (Math.floor(ost / 60000) < 10) {
+  //     mm = `0${Math.floor(ost / 60000)}`;
+  //   } else {
+  //     mm = `${Math.floor(ost / 60000)}`;
+  //   }
+  //   ost = DIFF - HH * 3600000 - mm * 60000;
+  // }
+  // if (ost >= 1000) {
+  //   if (Math.floor(ost / 1000) < 10) {
+  //     ss = `0${Math.floor(ost / 1000)}`;
+  //   } else {
+  //     ss = `${Math.floor(ost / 1000)}`;
+  //   }
+  //   ost = DIFF - HH * 3600000 - mm * 60000 - ss * 1000;
+  // }
+  // console.log(`${HH}:${mm}:${ss}.${ost}`);
   throw new Error('Not implemented');
 }
 
+// timeSpanToString(new Date(2000, 1, 1, 10, 0, 0), new Date(2000, 1, 1, 10, 30, 0));
 
 /**
  * Returns the angle (in radians) between the hands of an analog clock
