@@ -209,10 +209,15 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  for (let i = 0; i < str.length; i += 1) {
+    const letter = str[i];
+    if (str.indexOf(letter) === i && str.indexOf(letter, i + 1) === -1) {
+      return letter;
+    }
+  }
+  return null;
 }
-
 
 /**
  * Returns the string representation of math interval,
@@ -236,8 +241,22 @@ function findFirstSingleChar(/* str */) {
  *   5, 3, true, true   => '[3, 5]'
  *
  */
-function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
-  throw new Error('Not implemented');
+function getIntervalString(a, b, isStartIncluded, isEndIncluded) {
+  const arr = [a, b];
+  let left = ' ';
+  let right = ' ';
+  arr.sort((x, y) => x - y);
+  if (isStartIncluded === true) {
+    left = '[';
+  } else {
+    left = '(';
+  }
+  if (isEndIncluded === true) {
+    right = ']';
+  } else {
+    right = ')';
+  }
+  return `${left}${arr[0]}, ${arr[1]}${right}`;
 }
 
 
@@ -253,8 +272,10 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  let arr = str.split('');
+  arr = arr.reverse();
+  return arr.join('');
 }
 
 
@@ -270,8 +291,11 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const strNum = num.toString();
+  let arr = strNum.split('');
+  arr = arr.reverse();
+  return Number(arr.join(''));
 }
 
 
@@ -295,8 +319,37 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const strCcn = ccn.toString();
+  const arrStr = strCcn.split('');
+  if ((arrStr.length - 1) % 2 === 0) {
+    for (let i = 1; i < arrStr.length - 1; i += 2) {
+      const temp = arrStr[i];
+      if (arrStr[i] * 2 > 9) {
+        arrStr[i] = (temp * 2) - 9;
+      } else {
+        arrStr[i] = temp * 2;
+      }
+    }
+  } else {
+    for (let i = 0; i < arrStr.length - 1; i += 2) {
+      const temp = arrStr[i];
+      if (arrStr[i] * 2 > 9) {
+        arrStr[i] = (temp * 2) - 9;
+      } else {
+        arrStr[i] = temp * 2;
+      }
+    }
+  }
+  let ctrSum = 0;
+  for (let i = 0; i < arrStr.length - 1; i += 1) {
+    arrStr[i] = Number(arrStr[i]);
+    ctrSum += arrStr[i];
+  }
+  if ((ctrSum + (Number(arrStr[arrStr.length - 1]))) % 10 === 0) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -313,10 +366,17 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  let sum = 0;
+  const arr = num.toString().split('');
+  arr.forEach((element) => {
+    sum += Number(element);
+  });
+  const fArr = sum.toString().split('');
+  let result = 0;
+  fArr.forEach((e) => { result += Number(e); });
+  return result;
 }
-
 
 /**
  * Returns true if the specified string has the balanced brackets and false otherwise.
@@ -340,6 +400,22 @@ function getDigitalRoot(/* num */) {
  *   '{[(<{[]}>)]}' = true
  */
 function isBracketsBalanced(/* str */) {
+  // let result = true;
+  // const arr = str.split('');
+  // const map = {
+  //   '[': ']',
+  //   '(': ')',
+  //   '{': '}',
+  //   '<': '>',
+  // };
+  // for (let i = 0; i < arr.length / 2; i += 1) {
+  //   const temp = map[arr[i]];
+  //   if (arr[arr.length - 1 - i] !== temp) {
+  //     result = false;
+  //     break;
+  //   }
+  // }
+  // return result;
   throw new Error('Not implemented');
 }
 
@@ -364,8 +440,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return num.toString(n);
 }
 
 
@@ -405,8 +481,19 @@ function getCommonDirectoryPath(/* pathes */) {
  *
  */
 function getMatrixProduct(/* m1, m2 */) {
+  // let result = [];
+  // for (let i = 0; i < m1.length; i += 1) {
+  //   let temp = 0;
+  //   for (let j = 0; j < m2[0].length; j += 1) {
+  //     temp += m1[i][j] * m2[j][i];
+  //   }
+  // }
   throw new Error('Not implemented');
 }
+
+// let arr1 = [[1, 0, 0], [0, 1, 0], [0, 0, 1]];
+// let arr2 = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+// getMatrixProduct(arr1, arr2);
 
 
 /**
